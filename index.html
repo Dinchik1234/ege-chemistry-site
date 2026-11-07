@@ -6,384 +6,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ЕГЭ по химии — Тренажёр</title>
 
-<style>
-    * { box-sizing: border-box; }
-
-    :root {
-      --blue: #2878c8;
-      --blue-dark: #174b8f;
-      --blue-light: #eaf5ff;
-      --line: #c8e2fb;
-      --text: #183451;
-      --muted: #627b95;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 15px;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 10% 8%, rgba(111, 190, 255, .24), transparent 28%),
-        radial-gradient(circle at 92% 22%, rgba(74, 157, 236, .18), transparent 27%),
-        linear-gradient(135deg, #f3faff 0%, #e6f3ff 48%, #f8fcff 100%);
-    }
-
-    header {
-      padding: 25px 20px 18px;
-      text-align: center;
-      border-bottom: 1px solid rgba(125, 183, 235, .38);
-      background: rgba(255, 255, 255, .55);
-    }
-
-    .logo {
-      color: var(--blue-dark);
-      font-size: 27px;
-      font-weight: 800;
-      letter-spacing: -.6px;
-    }
-
-    .subtitle {
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    main {
-      width: min(940px, 100%);
-      margin: 0 auto;
-      padding: 34px 20px 46px;
-    }
-
-    .selection-panel, .hero {
-      background: rgba(255, 255, 255, .82);
-      border: 1px solid rgba(255, 255, 255, .95);
-      border-radius: 22px;
-      padding: 28px;
-      box-shadow: 0 14px 38px rgba(44, 111, 174, .12);
-      backdrop-filter: blur(8px);
-    }
-
-    .section-heading {
-      margin: 0 0 8px;
-      color: var(--blue-dark);
-      font-size: 24px;
-      font-weight: 750;
-      text-align: center;
-    }
-
-    .section-note {
-      margin: 0 0 23px;
-      color: var(--muted);
-      font-size: 14px;
-      text-align: center;
-    }
-
-    .variants {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .variant-tile {
-      min-height: 62px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-      border: 1px solid #b9daf8;
-      border-radius: 14px;
-      background: linear-gradient(145deg, #ffffff, #edf7ff);
-      color: var(--blue-dark);
-      box-shadow: 0 4px 12px rgba(41, 119, 194, .08);
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-    }
-
-    .variant-tile:hover {
-      transform: translateY(-2px);
-      background: #e1f1ff;
-      box-shadow: 0 8px 18px rgba(41, 119, 194, .17);
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 6px 11px;
-      border-radius: 20px;
-      background: #e3f2ff;
-      color: var(--blue-dark);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    h1 {
-      margin: 16px 0 10px;
-      font-size: 27px;
-      line-height: 1.25;
-    }
-
-    h2 {
-      margin: 24px 0 12px;
-      font-size: 21px;
-      color: var(--blue-dark);
-    }
-
-    .description {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .card {
-      background: #fff;
-      border: 1px solid #d8eafb;
-      border-radius: 15px;
-      padding: 18px;
-      box-shadow: 0 5px 16px rgba(44, 111, 174, .07);
-    }
-
-    .card label {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-      color: #244d76;
-    }
-
-    input {
-      width: 100%;
-      margin-top: 9px;
-      padding: 11px 12px;
-      border: 1px solid #c9deef;
-      border-radius: 10px;
-      background: #fbfdff;
-      color: var(--text);
-      font: inherit;
-      font-size: 14px;
-    }
-
-    input:focus {
-      outline: none;
-      border-color: #5da5e6;
-      box-shadow: 0 0 0 3px rgba(74, 157, 236, .16);
-    }
-
-    .button {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 12px 20px;
-      border: 0;
-      border-radius: 11px;
-      background: linear-gradient(135deg, #378fda, #2368b5);
-      color: white;
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-      cursor: pointer;
-      box-shadow: 0 6px 15px rgba(35, 104, 181, .2);
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
-
-    .button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 9px 19px rgba(35, 104, 181, .26);
-    }
-
-    .back-button {
-      margin-right: 8px;
-      background: #e7f3ff;
-      color: var(--blue-dark);
-      box-shadow: none;
-    }
-
-    #answer-form .variants {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    #answer-form .card {
-      padding: 14px;
-    }
-
-    #answer-form .card:first-child {
-      grid-column: 1 / -1;
-    }
-
-    #result {
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: #f4faff;
-    }
-
-    footer {
-      padding: 20px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    @media (max-width: 650px) {
-      main { padding: 24px 13px 32px; }
-      .selection-panel, .hero { padding: 20px 15px; border-radius: 18px; }
-      .logo { font-size: 23px; }
-      .section-heading { font-size: 21px; }
-      .variants { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
-      .variant-tile { min-height: 52px; font-size: 16px; border-radius: 12px; }
-      #answer-form .variants { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
-      h1 { font-size: 24px; }
-    }
-
-    body { position: relative; isolation: isolate; overflow-x: hidden; }
-    body::before, body::after {
-      content: "";
-      position: fixed;
-      z-index: -1;
-      pointer-events: none;
-      background-repeat: no-repeat;
-      background-size: contain;
-      opacity: .72;
-    }
-    body::before {
-      width: 260px;
-      height: 260px;
-      left: -55px;
-      top: 155px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 260' fill='none'%3E%3Cg stroke='%2369afe8' stroke-width='3' stroke-linecap='round' opacity='.55'%3E%3Cpath d='M48 46 L92 72 L137 46 L181 72 L181 123 L137 149 L92 123 L48 149 L48 200'/%3E%3Cpath d='M92 72 L92 123 M137 46 L137 98 L181 123 M92 123 L137 149'/%3E%3C/g%3E%3Cg fill='%23d9efff' stroke='%237db9ec' stroke-width='3'%3E%3Ccircle cx='48' cy='46' r='10'/%3E%3Ccircle cx='92' cy='72' r='10'/%3E%3Ccircle cx='137' cy='46' r='10'/%3E%3Ccircle cx='181' cy='72' r='10'/%3E%3Ccircle cx='181' cy='123' r='10'/%3E%3Ccircle cx='137' cy='149' r='10'/%3E%3Ccircle cx='92' cy='123' r='10'/%3E%3Ccircle cx='48' cy='149' r='10'/%3E%3Ccircle cx='48' cy='200' r='10'/%3E%3C/g%3E%3C/svg%3E");
-    }
-    body::after {
-      width: 300px;
-      height: 300px;
-      right: -60px;
-      bottom: 25px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' fill='none'%3E%3Cg stroke='%234b9be2' stroke-width='3' stroke-linecap='round' opacity='.5'%3E%3Cpath d='M65 52 L111 78 L157 52 L203 78 L249 52 M111 78 L111 130 L157 156 L203 130 L203 78 M157 156 L157 208 L203 234 L249 208'/%3E%3C/g%3E%3Cg fill='%23cde8ff' stroke='%2363a9e5' stroke-width='3'%3E%3Ccircle cx='65' cy='52' r='11'/%3E%3Ccircle cx='111' cy='78' r='11'/%3E%3Ccircle cx='157' cy='52' r='11'/%3E%3Ccircle cx='203' cy='78' r='11'/%3E%3Ccircle cx='249' cy='52' r='11'/%3E%3Ccircle cx='111' cy='130' r='11'/%3E%3Ccircle cx='157' cy='156' r='11'/%3E%3Ccircle cx='203' cy='130' r='11'/%3E%3Ccircle cx='157' cy='208' r='11'/%3E%3Ccircle cx='203' cy='234' r='11'/%3E%3Ccircle cx='249' cy='208' r='11'/%3E%3C/g%3E%3C/svg%3E");
-    }
-    .science-decor {
-      position: fixed;
-      z-index: -1;
-      pointer-events: none;
-      opacity: .48;
-      filter: drop-shadow(0 8px 12px rgba(50, 127, 190, .10));
-    }
-    .flask-decor { width: 118px; height: 150px; right: 4%; top: 105px; }
-    .tube-decor { width: 72px; height: 112px; left: 4%; bottom: 48px; opacity: .36; }
-    header, main, footer { position: relative; z-index: 1; }
-    .selection-panel {
-      position: relative;
-      overflow: hidden;
-    }
-    .selection-panel::before {
-      content: "CHEMISTRY • 01";
-      position: absolute;
-      top: 18px;
-      right: 22px;
-      color: #7fb7e5;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      opacity: .72;
-    }
-    .section-heading { letter-spacing: -.35px; }
-    .variant-tile {
-      position: relative;
-      overflow: hidden;
-    }
-    .variant-tile::after {
-      content: "";
-      position: absolute;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      right: -26px;
-      bottom: -29px;
-      background: rgba(105, 177, 235, .13);
-      transition: transform .2s ease;
-    }
-    .variant-tile:hover::after { transform: scale(1.8); }
-    @media (max-width: 650px) {
-      .flask-decor { width: 76px; height: 98px; right: 0; top: 105px; opacity: .22; }
-      .tube-decor { width: 48px; height: 78px; left: 0; bottom: 25px; opacity: .2; }
-      body::before { width: 155px; height: 155px; left: -55px; top: 130px; }
-      body::after { width: 175px; height: 175px; right: -60px; bottom: 15px; }
-      .selection-panel::before { display: none; }
-    }
-
-  </style>
+  <style>
+:root{--navy:#07377f;--blue:#0865ed;--ink:#092b70}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:radial-gradient(circle at 8% 88%,rgba(105,174,255,.14),transparent 18%),radial-gradient(circle at 94% 82%,rgba(105,174,255,.13),transparent 19%),linear-gradient(135deg,#f7f9ff,#eaf2ff 55%,#f9fbff);min-height:100vh}
+header{position:relative;overflow:hidden;min-height:154px;padding:22px clamp(20px,4.5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:24px;color:white;background:radial-gradient(circle at 52% 5%,rgba(73,177,255,.65),transparent 32%),linear-gradient(110deg,#06347a 0%,#075fc4 52%,#063274 100%);border-radius:0 0 48px 48px;box-shadow:0 14px 34px rgba(18,87,179,.24)}
+header:before{content:"";position:absolute;inset:0;opacity:.22;pointer-events:none;background-image:radial-gradient(circle at 48% 28%,#b9e5ff 0 7px,transparent 8px),radial-gradient(circle at 53% 43%,#b9e5ff 0 7px,transparent 8px),radial-gradient(circle at 59% 26%,#b9e5ff 0 7px,transparent 8px),radial-gradient(circle at 62% 57%,#b9e5ff 0 7px,transparent 8px),radial-gradient(circle at 68% 23%,#b9e5ff 0 7px,transparent 8px)}
+.brand,.slogan{position:relative;z-index:1}.brand{display:flex;align-items:center;gap:22px}.brand-icon{width:82px;height:104px;flex-shrink:0}.brand-title{font-size:clamp(27px,3vw,48px);font-weight:800;letter-spacing:.3px;line-height:1.05}.brand-subtitle{font-size:clamp(17px,2.1vw,32px);margin-top:7px;font-weight:500}.slogan{font-family:"Segoe Script","Brush Script MT",cursive;font-style:italic;font-size:clamp(20px,2.6vw,38px);text-align:right;transform:rotate(-2deg);white-space:nowrap}.slogan:after{content:"";display:block;height:7px;border-bottom:3px solid #b9dcff;border-radius:50%;transform:rotate(-3deg);margin-top:7px}
+main{max-width:1500px;margin:0 auto;padding:38px clamp(16px,2.4vw,38px) 24px}
+.hero{position:relative;overflow:hidden;isolation:isolate;padding:clamp(28px,4vw,62px) clamp(24px,4vw,60px) 32px;border:1px solid rgba(255,255,255,.9);border-radius:32px;background:linear-gradient(105deg,rgba(255,255,255,.96),rgba(255,255,255,.91) 42%,rgba(226,240,255,.76));box-shadow:0 14px 36px rgba(36,103,205,.13)}
+.hero:before{content:"";position:absolute;z-index:-1;right:-12px;top:0;width:57%;height:76%;background:radial-gradient(ellipse at 65% 80%,rgba(17,151,255,.28),transparent 34%),radial-gradient(ellipse at 70% 36%,rgba(103,188,255,.28),transparent 43%),linear-gradient(135deg,transparent,rgba(177,218,255,.36));filter:blur(2px)}
+.hero-top{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);align-items:center;gap:12px;min-height:260px}.hero-copy{position:relative;z-index:2}.tag{display:none}
+h1{font-size:clamp(40px,5vw,76px);line-height:1.03;letter-spacing:-1.7px;margin:0 0 20px;font-weight:800;color:#092f78}.description{font-size:clamp(18px,2vw,29px);line-height:1.45;color:#234f9c;max-width:660px;margin:0}.hero-art{width:100%;max-height:330px;min-height:220px;filter:drop-shadow(0 12px 12px rgba(27,106,194,.15))}
+.section-heading{font-size:clamp(22px,2.6vw,34px);margin:22px 0 20px;color:#0b347c}.variants{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:18px}
+.card.variant-card{min-width:0;display:flex;align-items:center;gap:14px;padding:18px 16px;border-radius:24px;border:1px solid #e1eaff;background:rgba(255,255,255,.84);box-shadow:0 8px 20px rgba(31,93,188,.12);transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.card.variant-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(31,93,188,.2);background:#fff}.variant-icon{display:flex;align-items:center;justify-content:center;flex:0 0 50px;width:50px;height:50px;border-radius:50%;background:linear-gradient(145deg,#2c91ff,#0754df);box-shadow:0 4px 10px rgba(14,94,226,.2)}.variant-icon svg{width:29px;height:29px}
+.variant-button{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:1;min-width:0;padding:4px 0;border:0;background:transparent;color:#082d75;font-size:clamp(14px,1.35vw,21px);font-weight:700;text-align:left;cursor:pointer}.chevron{font-size:29px;line-height:1;color:#1c60cb;font-weight:400}
+.variant-card:first-child{background:linear-gradient(135deg,#347df5,#0849d5);border-color:#8cbaff;box-shadow:0 8px 22px rgba(19,89,225,.32);color:#fff}.variant-card:first-child .variant-button{color:#fff}.variant-card:first-child .variant-icon{background:rgba(255,255,255,.16);box-shadow:none}.variant-card:first-child .chevron{color:#fff}
+#answer-form{margin-top:30px}#answer-form .hero{padding:clamp(22px,3vw,42px)}#answer-form .hero h2{margin:0 0 12px;font-size:clamp(25px,3vw,38px)}#answer-form .description{font-size:17px;margin-bottom:22px}
+#answer-fields{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}#answer-fields .card{display:block;padding:16px;border-radius:17px;background:#fff;border:1px solid #dce8ff;box-shadow:0 5px 16px rgba(31,93,188,.08)}
+label{display:block;font-size:15px;font-weight:700;color:#17417f}input{width:100%;padding:12px;margin-top:10px;border:1px solid #cbdcf6;border-radius:11px;background:#fbfdff;font:inherit;color:#173b76}input:focus{outline:none;border-color:#2c83f6;box-shadow:0 0 0 4px rgba(44,131,246,.13)}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:22px;padding:14px 24px;border:0;border-radius:14px;background:linear-gradient(135deg,#318cff,#0754dc);color:#fff;text-decoration:none;font-weight:700;font-size:16px;box-shadow:0 7px 18px rgba(15,92,220,.23);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}.button:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,92,220,.3)}.back-button{margin-right:10px;background:#e8f1ff;color:#1554b1;box-shadow:none}
+#result{padding:20px;border-radius:18px;background:#f2f7ff;border:1px solid #dce8ff}#result-text{line-height:1.65;color:#173b76}
+footer{display:flex;align-items:center;justify-content:center;gap:20px;text-align:center;padding:42px 20px 48px;color:#0758d9;font-family:"Segoe Script","Brush Script MT",cursive;font-style:italic;font-size:clamp(22px,2.7vw,38px)}footer:before,footer:after{content:"";width:min(14vw,200px);height:2px;background:#2c71d5}
+@media(max-width:1000px){.variants{grid-template-columns:repeat(3,minmax(0,1fr))}.hero-top{grid-template-columns:1fr .8fr}.slogan{white-space:normal}}
+@media(max-width:650px){header{min-height:auto;padding:18px 18px 22px;border-radius:0 0 28px 28px;align-items:flex-start}.brand{gap:12px}.brand-icon{width:54px;height:70px}.brand-title{font-size:24px}.brand-subtitle{font-size:15px}.slogan{display:none}main{padding:20px 12px}.hero{padding:24px 18px;border-radius:24px}.hero-top{grid-template-columns:1fr;min-height:0}h1{font-size:39px;letter-spacing:-.7px}.description{font-size:18px}.hero-art{min-height:0;height:190px;max-height:210px;margin-top:8px}.variants{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card.variant-card{padding:12px 10px;gap:9px;border-radius:17px}.variant-icon{width:38px;height:38px;flex-basis:38px}.variant-icon svg{width:23px;height:23px}.variant-button{font-size:14px}.chevron{font-size:22px}#answer-fields{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#answer-fields .card{padding:12px}footer{padding:32px 12px 38px;gap:10px;font-size:23px}footer:before,footer:after{width:10vw}}
+@media(max-width:380px){.variants{grid-template-columns:1fr}#answer-fields{grid-template-columns:1fr}h1{font-size:34px}}
+</style>
 </head>
 
 <body>
-
-  <div class="science-decor flask-decor" aria-hidden="true">
-    <svg viewBox="0 0 120 155" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="flaskGlass" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#ffffff" stop-opacity=".85"/>
-          <stop offset="1" stop-color="#80c8ff" stop-opacity=".22"/>
-        </linearGradient>
-        <linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#77c5ff" stop-opacity=".7"/>
-          <stop offset="1" stop-color="#338bd5" stop-opacity=".8"/>
-        </linearGradient>
-      </defs>
-      <path d="M43 12 H77 M48 12 V56 L22 111 Q16 127 35 132 H85 Q104 127 98 111 L72 56 V12"
-        fill="url(#flaskGlass)" stroke="#3d91d4" stroke-width="3.5" stroke-linejoin="round"/>
-      <path d="M29 104 Q60 96 91 104 L98 116 Q101 128 84 129 H36 Q19 128 24 116 Z"
-        fill="url(#liquid)" opacity=".8"/>
-      <circle cx="49" cy="85" r="4" fill="#ffffff"/>
-      <circle cx="68" cy="96" r="3" fill="#ffffff"/>
-      <circle cx="61" cy="73" r="2.5" fill="#ffffff"/>
-      <path d="M35 119 Q59 113 87 119" stroke="#dff4ff" stroke-width="2" fill="none" opacity=".8"/>
-      <path d="M53 22 V51" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity=".8"/>
-    </svg>
-  </div>
-  <div class="science-decor tube-decor" aria-hidden="true">
-    <svg viewBox="0 0 80 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-      <path d="M25 10 H55 M30 10 V83 Q30 108 40 108 Q50 108 50 83 V10"
-        fill="#e9f7ff" fill-opacity=".8" stroke="#5ca6df" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M31 68 H49 V84 Q49 105 40 105 Q31 105 31 84 Z" fill="#68b9f4" fill-opacity=".75"/>
-      <path d="M34 18 V59" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-      <circle cx="39" cy="79" r="2.5" fill="#ffffff"/>
-      <circle cx="44" cy="88" r="2" fill="#ffffff"/>
-    </svg>
-  </div>
-
   <header>
-    <div class="logo">ЕГЭ по химии</div>
-    <div class="subtitle">Тренажёр для успешной подготовки</div>
-  </header>
+  <div class="brand">
+    <svg class="brand-icon" viewBox="0 0 90 110" role="img" aria-label="Колба">
+      <defs><linearGradient id="flaskLiquid" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b8edff"/><stop offset="1" stop-color="#1596ff"/></linearGradient></defs>
+      <path d="M31 8h28v10h-5v31l25 42c5 9-1 14-10 14H21c-9 0-15-5-10-14l25-42V18h-5z" fill="#e8f7ff" stroke="#b7e3ff" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M37 62 17 94q-3 5 5 5h46q8 0 5-5L53 62z" fill="url(#flaskLiquid)"/>
+      <path d="M34 18h22M37 58h16" stroke="#75caff" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="37" cy="77" r="3" fill="white"/><circle cx="52" cy="86" r="4" fill="white"/><circle cx="47" cy="70" r="2.5" fill="white"/>
+    </svg>
+    <div><div class="brand-title">ЕГЭ ПО ХИМИИ</div><div class="brand-subtitle">Тренировочные варианты</div></div>
+  </div>
+  <div class="slogan">Готовься. Уверенно сдавай!</div>
+</header>
 
   <main>
-    <section id="variants" class="selection-panel">
-      <h1 class="section-heading">Выберите вариант</h1>
-      <p class="section-note">Нажмите на номер, чтобы перейти к заданиям</p>
-      <div class="variants" id="variants-list"></div>
-    </section>
+  <section class="hero">
+  <div class="hero-top">
+    <div class="hero-copy">
+      <span class="tag">Подготовка к ЕГЭ</span>
+      <h1>Выбери вариант</h1>
+      <p class="description">Реши тренировочный вариант ЕГЭ по химии и узнай свой результат!</p>
+    </div>
+    <svg class="hero-art" viewBox="0 0 540 330" role="img" aria-label="Лабораторная колба и пробирки">
+      <defs><linearGradient id="liquid" x1="0" y1="0" x2="0.7" y2="1"><stop stop-color="#42d5ff"/><stop offset="1" stop-color="#0877ee"/></linearGradient><linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" stop-opacity=".92"/><stop offset=".5" stop-color="#d8f0ff" stop-opacity=".42"/><stop offset="1" stop-color="#fff" stop-opacity=".86"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="8"/></filter></defs>
+      <g opacity=".32" stroke="#4aa9f7" stroke-width="3" fill="#66bfff"><path d="M24 178 82 140 120 180 162 130 210 158 244 115" fill="none"/><circle cx="24" cy="178" r="8"/><circle cx="82" cy="140" r="10"/><circle cx="120" cy="180" r="8"/><circle cx="162" cy="130" r="8"/><circle cx="210" cy="158" r="8"/><circle cx="244" cy="115" r="8"/></g>
+      <text x="25" y="82" fill="#2f91e8" font-size="46" font-style="italic">H₂O</text>
+      <g transform="translate(280,15)"><ellipse cx="92" cy="280" rx="104" ry="16" fill="#4daeff" opacity=".22" filter="url(#glow)"/><path d="M66 5h54v18l-3 42 54 150q9 24-17 24H30q-26 0-17-24L67 65l-1-42z" fill="url(#glass)" stroke="#1686e5" stroke-width="4"/><path d="M48 146h91l31 72q6 13-10 13H28q-15 0-9-13z" fill="url(#liquid)" opacity=".96"/><path d="M49 146h91" stroke="#b4efff" stroke-width="4"/><path d="M70 10h46M67 22h52" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M46 76 18 206q-4 13 6 16M132 76l39 128" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".8"/><g fill="#e6fbff"><circle cx="54" cy="184" r="3"/><circle cx="89" cy="202" r="4"/><circle cx="110" cy="174" r="2.5"/><circle cx="72" cy="164" r="2"/><circle cx="125" cy="213" r="3"/></g></g>
+      <g transform="translate(430,75)" stroke="#1686e5" stroke-width="4" fill="url(#glass)"><rect x="0" y="0" width="30" height="178" rx="10"/><rect x="42" y="10" width="30" height="168" rx="10"/><rect x="84" y="0" width="30" height="178" rx="10"/><path d="M3 70h24v98q0 7-7 7H10q-7 0-7-7zM45 75h24v93q0 7-7 7h-10q-7 0-7-7zM87 70h24v98q0 7-7 7H94q-7 0-7-7z" fill="url(#liquid)" stroke="none"/><path d="M-3 0h36M39 10h36M81 0h36" stroke="#8acfff" stroke-width="5" stroke-linecap="round"/></g>
+      <g opacity=".45" stroke="#238ce9" stroke-width="3" fill="none"><path d="M28 258 64 238 92 265 122 246"/><circle cx="28" cy="258" r="7" fill="#5db5ff"/><circle cx="64" cy="238" r="7" fill="#5db5ff"/><circle cx="92" cy="265" r="7" fill="#5db5ff"/><circle cx="122" cy="246" r="7" fill="#5db5ff"/></g>
+    </svg>
+  </div>
+  <h2 class="section-heading">Выбери вариант</h2>
+  <div class="variants" id="variants-list"></div>
+</section>
 
-    <section id="answer-form" style="display: none; margin-top: 0;">
+  <section id="answer-form" style="display: none; margin-top: 35px;">
       <div class="hero">
         <span class="tag" id="variant-label">Вариант 1</span>
-        <h1>Введи свои ответы</h1>
+
+        <h2>Введи свои ответы</h2>
+        <button type="button" class="button back-button" onclick="document.getElementById('answer-form').style.display='none'; document.getElementById('variants-list').scrollIntoView({behavior:'smooth'});">← Назад к вариантам</button>
+
         <p class="description">
-          Заполни поля напротив номеров заданий. Если не знаешь ответ, оставь поле пустым.
+          Заполни поля напротив номеров заданий.
+          Если не знаешь ответ, оставь поле пустым.
         </p>
+
         <form id="test-form">
           <div id="answer-fields" class="variants"></div>
-          <button type="button" class="button back-button" onclick="backToVariants()">← Все варианты</button>
-          <button type="submit" class="button">Завершить тест</button>
+
+          <button type="submit" class="button">
+            Завершить тест
+          </button>
         </form>
-        <div id="result" style="display: none; margin-top: 22px;">
+
+        <div id="result" style="display: none; margin-top: 25px;">
           <h2>Тест завершён!</h2>
           <p id="result-text"></p>
-          <button type="button" class="button" onclick="backToVariants()">Выбрать другой вариант</button>
         </div>
       </div>
     </section>
+
   </main>
 
-  <footer>Тренажёр для подготовки к ЕГЭ по химии</footer>
+
+  <footer>Успехов на экзамене!</footer>
 
   <script>
 let currentVariant = 1; 
@@ -392,18 +110,13 @@ const variantsList = document.getElementById("variants-list");
 
 for (let i = 1; i <= 30; i++) {
   variantsList.innerHTML += `
-    <button type="button" class="variant-tile" onclick="selectVariant(${i})" aria-label="Открыть вариант ${i}">
-      ${i}
-    </button>
+    <div class="card variant-card">
+      <span class="variant-icon" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="M11 3h10v3h-2v8l8 12c1.4 2.1.2 3.5-2.4 3.5H7.4C4.8 29.5 3.6 28.1 5 26l8-12V6h-2z" stroke="white" stroke-width="2.2" stroke-linejoin="round"/><path d="M9 22h14l3 4.5c.4.7 0 1.2-1 1.2H7c-1 0-1.4-.5-1-1.2z" fill="#bceeff"/><circle cx="14" cy="20" r="1.2" fill="white"/><circle cx="19" cy="24" r="1.5" fill="white"/></svg>
+      </span>
+      <button class="variant-button" onclick="selectVariant(${i})"><span>Вариант ${i}</span><span class="chevron">›</span></button>
+    </div>
   `;
-}
-
-function backToVariants() {
-  document.getElementById("answer-form").style.display = "none";
-  document.getElementById("variants").style.display = "block";
-  document.getElementById("result").style.display = "none";
-  document.getElementById("test-form").style.display = "block";
-  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function selectVariant(number) {currentVariant = number;
@@ -468,7 +181,6 @@ function selectVariant(number) {currentVariant = number;
   }
 
 
-  document.getElementById("variants").style.display = "none";
   formSection.style.display = "block";
   formSection.scrollIntoView({ behavior: "smooth" });
 }
